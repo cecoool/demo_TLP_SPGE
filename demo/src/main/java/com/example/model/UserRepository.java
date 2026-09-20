@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
 import java.util.Properties;
+import org.mindrot.jbcrypt.BCrypt;
+import java.nio.charset.StandardCharsets;
 
 
 public class UserRepository {
@@ -26,6 +28,9 @@ public class UserRepository {
 }
 
     public boolean createUser(String username, String email, String password) {
+
+        String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt(12)); 
+
         String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";    // INSERT добавя нов ред в таблицата. id се генерира от базата.
 
 
@@ -35,7 +40,7 @@ public class UserRepository {
         ) {
             statement.setString(1, username);
             statement.setString(2, email);
-            statement.setString(3, password);
+            statement.setString(3, passwordHash);
 
             return statement.executeUpdate() > 0;
         } catch (SQLException | IOException e) {

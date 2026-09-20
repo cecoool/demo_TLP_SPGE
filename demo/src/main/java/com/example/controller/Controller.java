@@ -14,7 +14,7 @@ public class Controller {
 
     public boolean createUser(String username, String email, String password) {
 
-        if (username.length() < 30 && email.length() < 50 && password.length() < 100)
+        if (username.length() < 30 && email.length() < 50 && password.length() < 72)
             return userRepository.createUser(username, email, password);
 
         
