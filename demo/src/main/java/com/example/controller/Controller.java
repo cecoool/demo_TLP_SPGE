@@ -1,7 +1,10 @@
 package com.example.controller;
-
 import com.example.model.User;
 import com.example.model.UserRepository;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@org.springframework.stereotype.Controller
 
 public class Controller {
 
@@ -20,4 +23,10 @@ public class Controller {
         
         return false;
     }
+
+    @GetMapping("/")
+    @ResponseBody
+    public String home() {
+    return "Нашето Java приложение работи!";
+}
 }
